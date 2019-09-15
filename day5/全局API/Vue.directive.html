@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo">
+
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        // 全局自定义指令 第一个指令的名字
+        // Vue.directive('yao', (el, binding, vnode) => {
+        //     // el就是指令绑定那个节点
+        //     // binding就是传给指令的那个值
+        //     el.style.color = binding.value
+        //     console.log(el, binding, vnode)
+        //     console.log('触发指令')
+        //     // 这里将会被 `bind` 和 `update` 调用
+        // })
+
+        // 全局
+        Vue.directive('showw', (el, binding, vnode) => {
+            // el就是指令绑定那个节点
+            // binding就是传给指令的那个值
+            el.style.display = binding.value ? 'block' : 'none'
+            console.log(el, binding, vnode)
+            console.log('触发指令')
+            // 这里将会被 `bind` 和 `update` 调用
+        })
+        new Vue({
+            el: "#demo",
+            data: {
+                color: 'blue',
+                bool: !0
+            },
+            template: `
+                <div>
+                    <p v-color="'red'">123</p>
+                    <p v-color="color">456</p>
+
+                    <p v-showw="bool">显示或者隐藏</p>
+                </div>
+            `,
+            // 局部
+            directives: {
+                'color'(el, binding, vnode) {
+                    // el就是指令绑定那个节点
+                    // binding就是传给指令的那个值
+                    el.style.color = binding.value
+                    console.log(el, binding, vnode)
+                    console.log('触发指令')
+                    // 这里将会被 `bind` 和 `update` 调用
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

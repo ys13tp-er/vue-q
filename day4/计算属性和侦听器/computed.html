@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo">
+        <p>{{computedNum}}</p>
+        <p>{{nameEn}}</p>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#demo',
+            // M
+            data: {
+                name: 'yao',
+                num: 1234567
+                // skill: ['ps', 'css', 'js']
+            },
+            // 选项
+            computed: {
+                // 你要计算的结果
+                nameEn() {
+                    let nameEn = this.name + ' eno'
+                    return nameEn
+                },
+                // 如果这个M没有用V上面，这个函数将不会触发
+                skill() {
+                    // 跟data里面写skill: ['ps', 'css', 'js']是等价的
+                    // 如果数据是经过逻辑运算得出来的用computed比较适合
+                    return ['ps', 'css', 'js']
+                },
+                computedNum() {
+                    return `￥${this.num}`
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

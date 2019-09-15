@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./animate.css" />
+</head>
+
+<body>
+    <style>
+        /* 进入的阶段 enter->enter-to */
+        .abc-enter-active {
+            /* 从animate.css放入已经定义好的动画 */
+            animation: flip .5s;
+        }
+
+        /* 离开的阶段 leave->leave-to */
+        .abc-leave-active {
+            /* 从animate.css放入已经定义好的动画 */
+            animation: flip .5s reverse;
+        }
+    </style>
+    <div id="demo">
+        <button @click="toggle">点击</button>
+        <!-- 加载动画name -->
+        <transition name="abc">
+            <div v-if="bool">隐藏或者显示</div>
+        </transition>
+    </div>
+    <script src="https://cn.vuejs.org/js/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el: "#demo",
+            data: {
+                bool: true
+            },
+            methods: {
+                toggle() {
+                    this.bool = !this.bool
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- v-model === v-on:change v-on:input -->
+    <div id="demo"></div>
+    <script src="../vue.js"></script>
+    <script>
+        Vue.component('cp1', {
+            data() {
+                return {
+                    timer: null
+                }
+            },
+            template: `
+                <div>组件</div>
+            `,
+            created() {
+                this.timer = window.setInterval(() => {
+                    console.log(1)
+                }, 1000)
+            },
+            beforeDestroy() {
+                console.log('beforeDestroy')
+            },
+            destroyed() {
+                console.log('destroyed')
+                clearInterval(this.timer)
+            }
+        })
+        var vm = new Vue({
+            el: '#demo',
+            data: {
+                bool: true
+            },
+            template: `
+                <div>
+                    <cp1 v-if="bool"></cp1>
+                    <button @click="bool=!bool">增加或者删除</button>
+                </div>
+            `,
+
+        })
+    </script>
+</body>
+
+</html>

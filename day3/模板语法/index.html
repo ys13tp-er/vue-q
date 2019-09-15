@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo">
+        <p>{{name}}</p>
+        <!-- 属性值操作 -->
+        <p>{{arr[0]}}</p>
+        <p>{{obj.skill}}</p>
+        <p>{{obj.skill}}</p>
+        <!-- 支持多元预算 -->
+        <!-- if else -->
+        <p>{{-age}}</p>
+        <p>{{name+age}}</p>
+        <p>{{age+8+'abc'}}</p>
+        <p>{{age>0?1:2}}</p>
+    </div>
+    <script src="../vue.js">
+    </script>
+    <script>
+        new Vue({
+            el: "#demo",
+            data: {
+                name: 'yao',
+                arr: ['a', 'b', 'c'],
+                obj: {
+                    skill: 'ps,js,css'
+                },
+                age: 0
+            }
+        })
+    </script>
+</body>
+
+</html>

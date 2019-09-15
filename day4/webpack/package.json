@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "vue": "^2.6.10"
+  },
+  "name": "webpack",
+  "version": "1.0.0",
+  "main": "webpack.config.js",
+  "devDependencies": {
+    "file-loader": "^4.1.0",
+    "html-loader": "^0.5.5",
+    "url-loader": "^2.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

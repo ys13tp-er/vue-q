@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo"></div>
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: "#demo",
+            data: {
+                version: Vue.version
+            },
+            template: `
+                <div>
+                    <p v-text="version"></p>
+                    <button @click="changeValue">Ok</button>
+                </div>
+            `,
+            methods: {
+                changeValue() {
+                    let obj = {
+                        name: 'yao',
+                        skill: ['ps', 'js', 'css']
+                    }
+                    console.log(obj)
+                    // 更新对象 只要是对象或者数组，都可以用这个方法来改对象
+                    Vue.set(obj, 'name', 'jing')
+                    console.log(obj)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

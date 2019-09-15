@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo"></div>
+    <script src="../vue.js"></script>
+    <script>
+        // 定义一个对象
+        var myPlugin = {
+            // 安装 必须得有
+            install(Vue, options) {
+                // new Vue选项
+                // 放Vue的属性上
+                Vue.plus = function (a, b) {
+                    // 逻辑...
+                    return a + b
+                }
+                // 放原型链上
+                Vue.prototype.$plus = function (a, b) {
+                    // 逻辑...
+                    return a + b
+                }
+                // 组件
+                Vue.component(options.name, {
+                    template: `
+                        <header>头部</header>
+                    `
+                })
+            }
+        }
+        // 插件本质对象
+        Vue.use(myPlugin, {
+            name: 'my-header'
+        })
+        var vm = new Vue({
+            el: "#demo",
+            data: {
+                version: Vue.version
+            },
+            template: `
+                <div>
+                    <p v-text="version"></p>
+                    <my-header></my-header>
+                </div>
+            `
+        })
+        console.log(vm)
+        console.log(Vue.plus(9, 8))
+    </script>
+</body>
+
+</html>

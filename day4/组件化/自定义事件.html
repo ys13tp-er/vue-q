@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            color: white;
+            background-color: red;
+        }
+    </style>
+    <div id="demo">
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue();
+        // 全局注册
+        Vue.component('my-footer', {
+            // 每个组件在经过使用的时候都返回一个全新的data数据模型
+            // M
+            data() {
+                return {
+                    name: 'yao'
+                }
+            },
+            // V
+            template: `
+                <div>
+                    底部组件
+                    <input v-model="name" />
+                    <button @click="send">传递数据</button>
+                </div>
+            `,
+            methods: {
+                send() {
+                    // 传递的事件名 传递的数据
+                    // 触发一个事件为toHeader，并且传输this.name数据
+                    vm.$emit('toHeader', this.name)
+                }
+            }
+        })
+        Vue.component('my-header', {
+            template: `
+                <header>
+                    头部组件 {{this.name}}
+                </header>
+            `,
+            data() {
+                return {
+                    name: 'jing'
+                }
+            },
+            // 组件被挂载的时候触发
+            mounted() {
+                // 监听外部的事件触发
+                vm.$on('toHeader', (data) => {
+                    console.log(data)
+                    this.name = data
+                })
+            }
+        })
+
+        // 根容器
+        new Vue({
+            el: "#demo",
+            template: `
+                <div>
+                    <!-- 组件其实也是自定义标签 -->
+                    <my-header></my-header>
+                    <my-header></my-header>
+                    <my-header></my-header>
+                    <my-footer></my-footer>
+                    <my-footer></my-footer>
+                </div>
+            `
+        })
+    </script>
+</body>
+
+</html>

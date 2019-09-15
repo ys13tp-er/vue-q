@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <textarea id="message"></textarea>
+    <button id="send">发送信息</button>
+    <ul id="list"></ul>
+    <script>
+        var button = document.querySelector("#send");
+        var list = document.querySelector("#list");
+        // 连接 socket 服务器
+        var socket = new WebSocket('ws://10.3.132.177:8080'); //它是属于html5的新特性
+        console.log(socket);
+        //监听 socket 的连接
+        socket.onopen = function () {
+            console.log("服务已连接 ws://10.3.132.177:8080");
+        }
+        //监听服务端断开
+        socket.onclose = function () {
+            console.log("服务已断开");
+            socket = null;
+        }
+        //监听服务端异常
+        socket.onerror = function () {
+            console.log("服务错误");
+            socket = null;
+        }
+        //监听服务端广播过来的消息
+        // onreadystatechange
+        socket.onmessage = function (msg) {
+            console.log(msg.data);
+            // 拿到信息之后，渲染信息到列表页
+            list.innerHTML += `<li>${msg.data}</li>`
+        }
+
+        button.onclick = () => {
+            let message = document.querySelector("#message").value;
+            socket.send(message);
+        }
+    </script>
+</body>
+
+</html>

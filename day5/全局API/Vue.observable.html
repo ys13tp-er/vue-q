@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo"></div>
+    <hr />
+    <div id="demo2"></div>
+    <script src="../vue.js"></script>
+    <script>
+        // 公有仓库
+        // props
+        // vuex
+        // $emit $on
+        // vuex
+        const state = Vue.observable({
+            count: 0
+        })
+        // 组件的数据不是私有的，不仅仅是单独自己用的，那就可以把数据存放到state里面，然后再分发下来
+        state.count = 789
+        new Vue({
+            el: "#demo",
+            computed: {
+                count() {
+                    // 从仓库导出一个count数据
+                    return state.count
+                }
+            },
+            template: `
+                <div>
+                    <p>{{count}}</p>
+                </div>
+            `
+        })
+
+        new Vue({
+            el: "#demo2",
+            computed: {
+                count() {
+                    // 从仓库导出一个count数据
+                    return state.count
+                }
+            },
+            template: `
+                <div>
+                    <p>{{count}}</p>
+                    <button @click="test">Ok</button>
+                </div>
+            `,
+            methods: {
+                test() {
+                    console.log(1)
+                    state.count = 999
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- v-model === v-on:change v-on:input -->
+    <div id="demo"></div>
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#demo',
+            data: {
+                name: '生命周期',
+                vnode: null,
+                color: 'red'
+            },
+            template: `
+                <div>
+                    <div ref="pp">{{name}}</div>
+                    <input v-model="name" />
+                </div>
+            `,
+            // render(createElement) {
+            //     console.log('--------render--------')
+            //     var vnode = createElement('div', {
+            //         style: {
+            //             color: this.color,
+            //             fontSize: '14px'
+            //         }
+            //     }, this.name)
+            //     this.vnode = vnode
+            //     console.log('vnode', vnode)
+            //     // 直接操作虚拟DOM，虚拟DOM还没挂载到真实DOM
+            //     vnode.tag = 'p'
+            //     vnode.children[0].text = 'hi'
+            //     return vnode
+            // },
+            // 钩子 容器诞生前 组件诞生前
+            // 诞生前，没数据没视图
+            beforeCreate() {
+                console.log('--------beforeCreate--------')
+                console.log('V', this.$el)
+                console.log('M', this.$data)
+            },
+            // 触发一次，就是组件进来的那一次
+            created() {
+                // 视图没有
+                // 数据就位了
+                console.log('--------created--------')
+                console.log('V', this.$el)
+                console.log('M', this.$data)
+            },
+            beforeMount() {
+                // 模板准备中，但是拿到挂载点
+                // 数据也准备
+                // 数据放进模板了，但是模板还没挂载到真实DOM
+                console.log('--------beforeMount--------')
+                console.log('V', this.$el)
+                console.log('M', this.$data)
+            },
+            mounted() {
+                console.log('--------mounted--------')
+                console.log('V', this.$el)
+                console.log('M', this.$data)
+                // 直接动真实DOM
+                // var p = document.querySelector('p')
+                // p.style.color = 'red'
+                // console.log(p)
+                // 直接动虚拟DOM
+                console.log(this)
+                this.$refs.pp.style.color = 'red'
+            },
+            // 类似watch
+            // watch是单独监听一个数据
+            // beforeUpdate只要一个数据便，都会触发
+            beforeUpdate() {
+                // 更新前
+                // 数据变化了，但是真实dom和虚拟dom都没变
+                console.log('--------beforeUpdate--------')
+                console.log('V', this.$el.outerHTML)
+                console.log('M', this.$data)
+            },
+            // render
+            // 虚拟DOM变了
+            updated() {
+                // 更新后
+                // 真实dom和虚拟dom和数据都变
+                console.log('--------updated--------')
+                console.log('V', this.$el.outerHTML)
+                console.log('M', this.$data)
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+<template name="component-name">
+    <div>
+        hello world
+        <p>123</p>
+        <ul>
+            <li>{this.name}</li>
+        </ul>
+        <p>123</p>
+    </div>
+</template>

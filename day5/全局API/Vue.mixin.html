@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo"></div>
+    <script src="../vue.js"></script>
+    <script>
+        // 如果容器或者组件没有的话，那就注入，如果有的话它不会覆盖，两个都会触发
+        Vue.mixin({
+            // 选项
+            data() {
+                return {
+                    name: 'yao'
+                }
+            },
+            // 这里面会监听
+            watch: {
+                name() {
+                    console.log(this.name)
+                }
+            },
+            methods: {
+                test() {
+                    console.log(1)
+                }
+            },
+        })
+        // new Vue本质是一个组件 容器 根组件
+        var vm = new Vue({
+            el: "#demo",
+            data: {
+                version: Vue.version
+            },
+            template: `
+                <div>
+                    <p v-text="name"></p>
+                    <input v-model="name" />
+                    <button @click="test">ok</button>
+                </div>
+            `,
+            methods: {
+                test() {
+                    console.log(2)
+                }
+            },
+            watch: {
+                name() {
+                    console.log(11111)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

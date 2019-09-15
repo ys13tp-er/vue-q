@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo"></div>
+    <script src="../vue.js"></script>
+    <script>
+        // 货币过滤器
+        Vue.filter('currency', (value) => {
+            // value接受传进来的数据，然后处理返回
+            return `￥${value}`
+        })
+        new Vue({
+            el: "#demo",
+            data: {
+                version: Vue.version
+            },
+            template: `
+                <div>
+                    <p>{{version}}</p>
+                    <p>过滤器就是用|管道字符</p>
+                    <p>{{version|currency}}</p>
+                  
+                </div>
+            `
+        })
+    </script>
+</body>
+
+</html>

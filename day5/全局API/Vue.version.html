@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="demo"></div>
+    <script src="../vue.js"></script>
+    <script>
+        // 版本号
+        // 根据版本号来去判断,做vue的兼容
+        console.log(Vue.version)
+        new Vue({
+            el: "#demo",
+            data: {
+                version: Vue.version
+            },
+            template: `
+                <div>
+                    <p v-text="version"></p>
+                </div>
+            `
+        })
+    </script>
+</body>
+
+</html>
